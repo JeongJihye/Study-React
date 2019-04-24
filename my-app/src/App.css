@@ -1,0 +1,16 @@
+.App {
+  background: black;
+  color: aqua;
+  font-size: 36px;
+  padding: 1rem;
+  font-weight: 600;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
