@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 //클래스형 컴포넌트
 //class MyName extends Component {
