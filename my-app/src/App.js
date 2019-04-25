@@ -15,7 +15,8 @@ class App extends Component {
     };
     return (
       <div> 
-        {/* props, 부모 컴포넌트가 자식 컴포넌트에게 주는 값 */}
+        <Counter></Counter>
+        {/* props : 부모 컴포넌트가 자식 컴포넌트에게 주는 값 */}
         <MyName name="리액트"></MyName>       
         {/* 객체 형태로 style 지정 */}
         <div style={style}>
