@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import MyName from './MyName.js';
 
 class App extends Component {
   render() {
@@ -13,7 +14,9 @@ class App extends Component {
       fontSize: '12px'
     };
     return (
-      <div>
+      <div> 
+        {/* props, 부모 컴포넌트가 자식 컴포넌트에게 주는 값 */}
+        <MyName name="리액트"></MyName>       
         {/* 객체 형태로 style 지정 */}
         <div style={style}>
           hello {name}!
