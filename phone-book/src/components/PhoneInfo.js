@@ -32,6 +32,7 @@ class PhoneInfo extends Component {
         });
     }
 
+    //editing값이 바뀔 때 동작
     componentDidUpdate(prevProps, prevState) {
         const { info, onUpdate } = this.props;
         if(!prevState.editing && this.state.editing) {
@@ -49,7 +50,17 @@ class PhoneInfo extends Component {
         }
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        if(!this.state.editing && !nextState.editing && nextProps.info === this.props.info) {
+            return false;
+        }
+
+        return true;
+    }
+
     render() {
+        console.log('render PhonInfo ' + this.props.info.id);
+
         const style = {
             border: '1px solid black',
             padding: '8px',
