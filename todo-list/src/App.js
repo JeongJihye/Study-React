@@ -1,18 +1,28 @@
 import React, { Component } from 'react';
-import TodoListTempleta from './Components/TodoListTemplate.js';
+import TodoListTemplate from './Components/TodoListTemplate.js';
 import Form from './Components/Form.js';
 import TodoItemList from './Components/TodoItemList.js';
+import Palette from './Components/Palette.js';
+
+const colors = ['#343a40', '#f03e3e', '#12b886', '#228ae6'];
 
 class App extends Component {
   id = 3;
 
   state = {
+    color: '#343a40',
     input: '',
     todos: [
       { id: 0, text: '리액트 소개', checked: false },
       { id: 1, text: 'JSX 소개', checked: true },
       { id: 2, text: '라이플 사이클', checked: false }
     ]
+  }
+
+  handleSelectedColor = (color) => {
+    this.setState({
+      color
+    })
   }
 
   handleChange = (e) => {
@@ -22,13 +32,14 @@ class App extends Component {
   }
 
   handleCreate = () => {
-    const { input, todos } = this.state;
+    const { input, todos, color } = this.state;
     this.setState({
       input: '',
       todos: todos.concat({
         id: this.id++,
         text: input,
-        checked: false
+        checked: false,
+        color
       })
     })
   }
@@ -66,8 +77,9 @@ class App extends Component {
   }
 
   render() {
-    const { input, todos } = this.state;
+    const { color, input, todos } = this.state;
     const {
+      handleSelectedColor,
       handleChange,
       handleCreate,
       handleKeyPress,
@@ -76,9 +88,10 @@ class App extends Component {
     } = this;
 
     return (
-      <TodoListTempleta form={<Form value={input} onChange={handleChange} onCreate={handleCreate} onKeyPress={handleKeyPress}></Form>}>
+      <TodoListTemplate palette={<Palette colors={colors} selected={color} onSelect={handleSelectedColor}></Palette>} 
+                        form={<Form value={input} onChange={handleChange} onCreate={handleCreate} onKeyPress={handleKeyPress} color={color}></Form>}>
         <TodoItemList todos={todos} onToggle={handleToggle} onRemove={handleRemove}></TodoItemList>
-      </TodoListTempleta>
+      </TodoListTemplate>
     );
   }
 }
