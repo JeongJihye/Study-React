@@ -7,16 +7,34 @@ class App extends Component {
 
   }
 
+  _callApi = () => {
+    //fetch를 이용해 ajax사용
+    //promise : then().catch() 비동기 작업 진행 (try~catch와 비슷)
+    return fetch("https://yts.am/api/v2/list_movies.json?sort_by=rating")
+    .then(response => response.json())
+    .then(json => json.data.movies)
+    .catch(err => console.log(err))
+  }
+
+  _getMovies = async() => {
+    console.log("_getMovies");
+    const movies = await this._callApi(); //await : 뒤에 호출한 함수가 끝나길 기다림
+
+    this.setState({
+      movies
+    })
+  }
+
   componentWillMount() {
     console.log("componentWillMount");
   }
 
   componentDidMount() {
     console.log("componentDidMount");
-
+    this._getMovies();
     //fetch를 이용해 ajax사용
     //promise : then().catch() 비동기 작업 진행 (try~catch와 비슷)
-    fetch("https://yts.am/api/v2/list_movies.json?sort_by=rating").then(response => response.json()).then(json => console.log(json)).catch(err => console.log(err))
+    //fetch("https://yts.am/api/v2/list_movies.json?sort_by=rating").then(response => response.json()).then(json => console.log(json)).catch(err => console.log(err))
 
     /*setTimeout(() => {
       this.setState({
@@ -46,7 +64,7 @@ class App extends Component {
 
   _renderMovies = () => {
     const movies = this.state.movies.map((movie, index) => {
-      return <Movie title={movie.title} poster={movie.poster} key={index}></Movie>
+      return <Movie title={movie.title} poster={movie.medium_cover_image} key={index}></Movie>
     })
     return movies
   }
