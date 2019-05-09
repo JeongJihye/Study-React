@@ -14,7 +14,11 @@ class App extends Component {
   componentDidMount() {
     console.log("componentDidMount");
 
-    setTimeout(() => {
+    //fetch를 이용해 ajax사용
+    //promise : then().catch() 비동기 작업 진행 (try~catch와 비슷)
+    fetch("https://yts.am/api/v2/list_movies.json?sort_by=rating").then(response => response.json()).then(json => console.log(json)).catch(err => console.log(err))
+
+    /*setTimeout(() => {
       this.setState({
         movies: [
           //...this.state.movies, //기존 목록 유지(infinite scroll)
@@ -37,6 +41,7 @@ class App extends Component {
         ]
       })
     }, 5000)
+    */
   }
 
   _renderMovies = () => {
