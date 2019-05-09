@@ -4,24 +4,7 @@ import Movie from './Components/Movie.js';
 
 class App extends Component {
   state = {
-    movies : [
-      {
-        title : "Iron Man",
-        poster : "https://movie-phinf.pstatic.net/20111222_37/1324501632182vbSoY_JPEG/movie_image.jpg"
-      },
-      {
-        title : "Thor",
-        poster : "https://movie-phinf.pstatic.net/20111222_37/1324501632182vbSoY_JPEG/movie_image.jpg"
-      },
-      {
-        title : "Hulk",
-        poster : "https://movie-phinf.pstatic.net/20111222_37/1324501632182vbSoY_JPEG/movie_image.jpg"
-      },
-      {
-        title : "Captin America",
-        poster : "https://movie-phinf.pstatic.net/20111222_37/1324501632182vbSoY_JPEG/movie_image.jpg"
-      }
-    ]
+
   }
 
   componentWillMount() {
@@ -34,9 +17,21 @@ class App extends Component {
     setTimeout(() => {
       this.setState({
         movies: [
-          ...this.state.movies, //기존 목록 유지
+          //...this.state.movies, //기존 목록 유지(infinite scroll)
           {
-            title : "Black Panther",
+            title : "Iron Man",
+            poster : "https://movie-phinf.pstatic.net/20111222_37/1324501632182vbSoY_JPEG/movie_image.jpg"
+          },
+          {
+            title : "Thor",
+            poster : "https://movie-phinf.pstatic.net/20111222_37/1324501632182vbSoY_JPEG/movie_image.jpg"
+          },
+          {
+            title : "Hulk",
+            poster : "https://movie-phinf.pstatic.net/20111222_37/1324501632182vbSoY_JPEG/movie_image.jpg"
+          },
+          {
+            title : "Captin America",
             poster : "https://movie-phinf.pstatic.net/20111222_37/1324501632182vbSoY_JPEG/movie_image.jpg"
           }
         ]
@@ -44,12 +39,25 @@ class App extends Component {
     }, 5000)
   }
 
+  _renderMovies = () => {
+    const movies = this.state.movies.map((movie, index) => {
+      return <Movie title={movie.title} poster={movie.poster} key={index}></Movie>
+    })
+    return movies
+  }
+
   render() {
     console.log("render");
     return (
       <div className="App">
-        {this.state.greeting}
-        {this.state.movies.map((movie, index) => {return <Movie title={movie.title} poster={movie.poster} key={index}></Movie>})}
+        { 
+          //{this.state.greeting}
+        }
+        {
+          //{this.state.movies.map((movie, index) => {return <Movie title={movie.title} poster={movie.poster} key={index}></Movie>})}
+        }
+        { /*state가 있는지 없는지 판단 */ }
+        {this.state.movies ? this._renderMovies() : "loading"}
       </div>
     );
     }
