@@ -1,2 +1,2 @@
-# study-react
-study react
+# Study React
+
